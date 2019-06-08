@@ -1,0 +1,63 @@
+
+<style>
+    .searchindex {
+    margin: auto;
+    width: 180px;
+    }
+    .centered {
+      margin: auto;
+      width: 80px;
+    }
+    
+    </style>
+
+
+<div class="searchindex">
+    <input type="text" id="id" #search> 
+  </div>
+  <div class="centered">
+      <button (click)="GetUser(search.value)">GetUser</button>
+      </div>
+
+
+      <div class="container">
+          <h2>User</h2>
+          <table class="table table-hover" style="width:500px ">
+            <thead> 
+              <tr>
+                <th>Name</th>
+                <th>State</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="Data">
+
+            <td  *ngIf="Data.id !== EditRowID" (click)="SetID(Data.id)" >{{Data.name}}</td>
+            <td  *ngIf="Data.id === EditRowID"  ><input type="text" [(ngModel)]="Data.name"></td>            
+            <input type="hidden" [(ngModel)]="Data.name" #name>
+
+
+            <td *ngIf="Data.id !== EditRowID" (click)="SetID(Data.id)">
+            <div *ngIf="Data.isActive == true; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>{{Data.isActive}}</ng-template>
+            <ng-template #elseBlock>{{Data.isActive}}</ng-template>
+            </td>   
+            <td *ngIf="Data.id === EditRowID" >
+                <select  [(ngModel)]="Data.isActive">
+                    <option value=false>InActive</option>  
+                  <option value=true>Active</option>                  
+                  </select>
+            </td>
+            <input type="hidden" [(ngModel)]="Data.isActive" #state>
+
+
+                
+                <td align="right">
+                  <button class="w3-button w3-red" (click)="DeleteUser(Data.id)">Delete</button>
+                  <button class="w3-button w3-green" (click)="EditUser(Data.id,name.value,state.value)">Update</button>
+                </td>
+              </tr> 
+    
+            </tbody>
+          </table>
+        </div>

@@ -1,0 +1,22 @@
+
+
+<div class="container">
+  <h2>  Insert    </h2>
+      <div>
+      <label for="name"> Name</label>
+      &nbsp;
+      <input type="text" id="name" #name>
+    </div>
+  
+    <div>
+      <label for="State"> State</label>
+      &nbsp;
+      <select  id="state" #state>
+        <option value=1>Active</option>
+        <option value=0>Inactive</option>
+      </select>
+    </div>
+
+  
+    <button (click)="onSubmit(name.value,state.value)">Submit</button>
+  </div>

@@ -1,0 +1,51 @@
+
+  
+
+
+  <div class="container">
+      <h2>Users</h2>
+      <table class="table table-hover" style="width:800px ">
+        <thead> 
+          <tr>
+            <th>Name</th>
+            <th>Active</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of TableData">
+            <td  *ngIf="user.id !== EditRowID" (click)="SetID(user.id)" >{{user.name}}</td>
+            <td  *ngIf="user.id === EditRowID" ><input type="text" [(ngModel)]="user.name"></td>            
+            <input type="hidden" [(ngModel)]="user.name" #name>
+
+
+            <td *ngIf="user.id !== EditRowID" (click)="SetID(user.id)">
+            <div *ngIf="user.isActive == true; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>{{user.isActive}}</ng-template>
+            <ng-template #elseBlock>{{user.isActive}}</ng-template>
+            </td>   
+            <td *ngIf="user.id === EditRowID"  >
+                <select  [(ngModel)]="user.isActive">
+                    <option value=false>InActive</option>  
+                  <option value=true>Active</option>                  
+                  </select>
+            </td>
+            <input type="hidden" [(ngModel)]="user.isActive" #state>
+
+
+            <td align="right">
+              <button class="w3-button w3-red" (click)="DeleteUser(user.id)">Delete</button>
+              <button class="w3-button w3-green" (click)="EditUser(user.id,name.value,state.value)">Update</button>
+            </td>
+          </tr> 
+
+        </tbody>
+      </table>
+    </div>
+  
+
+                           
+   
+              
+              
+      
